@@ -1,7 +1,7 @@
 # HackerRank
-*Solutions to challenges on hackerrank.com*.
+**My solutions to challenges on hackerrank.com**.
 
-Most of my solutions are in PHP, or C++ for speed or other reasons. Some Java might be included at times.
+Most of the solutions are in PHP, or C++ for speed or other reasons. Some Java might be included at times.
 
 If it's a Functional Programming challenge, it will be either Scala or Haskell. 
 
