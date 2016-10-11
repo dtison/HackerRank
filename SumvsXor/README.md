@@ -1,6 +1,7 @@
-Pangrams
-========
+Sum vs Xor
+==========
 
-PHP code [passes all tests](https://www.hackerrank.com/challenges/pangrams) on 2016/09/15
+C++ code [passed all tests](https://www.hackerrank.com/challenges/sum-vs-xor) on 2016/10/10
 
-Original [Pangrams](https://www.hackerrank.com/challenges/pangrams) challenge.
+Original [Sum vs Xor](https://www.hackerrank.com/challenges/sum-vs-xor) challenge.
+
