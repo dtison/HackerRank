@@ -5,4 +5,4 @@ Arrays: Left Rotation
 
 C++ code [passes all tests](https://www.hackerrank.com/challenges/ctci-array-left-rotation) on 2016/09/28
 
-Original [CamelCase](https://www.hackerrank.com/challenges/ctci-array-left-rotation) challenge.
+Original [Left Rotate](https://www.hackerrank.com/challenges/ctci-array-left-rotation) challenge.
