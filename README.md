@@ -9,7 +9,7 @@ If it's a Functional Programming challenge, it will be either **Scala** or **Has
 
 If you find any problem with the solutions - for any reason, feel free to open an [issue](https://github.com/dtison/HackerRank/issues).
 
-**Building the Solutions - C++ Example:**
+**Building the Solutions - C++ Solutions:**
 
 cd to Directory
 
@@ -37,4 +37,4 @@ app="${PWD##*/}"
 cat input.txt | ./$app;
 ```
 
-input.txt is taken from the sample input given for the challenge.
+[input.txt is taken from the sample input given for the challenge.]
