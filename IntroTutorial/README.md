@@ -3,7 +3,7 @@ Tutorial Intro
 
 C++ code [passes all tests](https://www.hackerrank.com/challenges/tutorial-intro) on 2017/02/08
 
-Original [C Tutorial Strings](https://www.hackerrank.com/challenges/tutorial-intro) challenge.
+Original [Intro Tutorial](https://www.hackerrank.com/challenges/tutorial-intro) challenge.
 
 **Notes:**
 
