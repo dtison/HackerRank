@@ -1,9 +1,9 @@
-Tutorial Intro
-==============
+Insertion Sort 1
+================
 
 C++ code [passes all tests](https://www.hackerrank.com/challenges/insertionsort1) on 2017/02/09
 
-Original [Intro Tutorial](https://www.hackerrank.com/challenges/insertionsort1) challenge.
+Original [Insertion Sort 1](https://www.hackerrank.com/challenges/insertionsort1) challenge.
 
 
 **Note about source comments:**
