@@ -1,9 +1,9 @@
 Tutorial Intro
 ==============
 
-C++ code [passes all tests](https://www.hackerrank.com/challenges/insertionsort1) on 2017/02/09
+C++ code [passes all tests](https://www.hackerrank.com/challenges/insertionsort2) on 2017/02/12
 
-Original [Intro Tutorial](https://www.hackerrank.com/challenges/insertionsort1) challenge.
+Original [Intro Tutorial](https://www.hackerrank.com/challenges/insertionsort2) challenge.
 
 
 **Note about source comments:**
