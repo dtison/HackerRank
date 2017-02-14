@@ -24,14 +24,11 @@ void displayArray(vector <int> & array) {
 
 int partitionLomuto(vector <int> & numbers, int lo, int hi) {
     int pivot = numbers[hi];
-    cout << "pivot now: " << pivot << endl;
     int i = lo - 1;
     for (int j = lo; j < hi; j++) {
         if (numbers[j] <= pivot) {
-            cout << numbers[j] << " <= " << pivot << " i is " << i << endl;
             i++;
             swap(numbers[i], numbers[j]);
-
         }
     }
     swap(numbers[i + 1], numbers[hi]);
@@ -61,20 +58,7 @@ int main() {
         cin >> numbers[i];
     }
 
-    displayArray(numbers);
-
-    quickSort(numbers, 1, numbers.size() - 1);
+    quickSort(numbers, 0, numbers.size() - 1);
 
     return 0;
 }
-
-/*  Test 1
- *
- *
-1 2 6 7 3 5 4 9 8
-1 2 6 7 3 5 4 8 9
-1 2 3 4 6 5 7 8 9
-1 2 3 4 6 5 7 8 9
-1 2 3 4 5 6 7 8 9
- *
- */
