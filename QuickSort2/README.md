@@ -1,9 +1,9 @@
-Quick Sort 1
+Quick Sort 2
 ============
 
-C++ code [passes all tests](https://www.hackerrank.com/challenges/quicksort1) on 2017/02/13
+C++ code [passes all tests](https://www.hackerrank.com/challenges/quicksort2) on 2017/02/13
 
-Original [Quick Sort 1](https://www.hackerrank.com/challenges/quicksort1) challenge.
+Original [Quick Sort 2](https://www.hackerrank.com/challenges/quicksort2) challenge.
 
 
 **Note about source comments:**
