@@ -1,9 +1,9 @@
-Quick Sort 3
-============
+Counting Sort 3
+===============
 
-C++ code [passes all tests](https://www.hackerrank.com/challenges/quicksort3) on 2017/02/14
+C++ code [passes all tests](https://www.hackerrank.com/challenges/countingsort1) on 2017/02/15
 
-Original [Quick Sort 3](https://www.hackerrank.com/challenges/quicksort3) challenge.
+Original [Counting Sort 1](https://www.hackerrank.com/challenges/countingsort1) challenge.
 
 
 **Note about source comments:**
