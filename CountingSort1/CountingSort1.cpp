@@ -17,11 +17,12 @@
 using namespace std;
 
 
+
 void displayArray(vector <int> & array) {
     for_each(array.begin(), array.end(), [] (int & element) {cout << element << " ";});
     cout << endl;
 }
-
+/*
 int partitionLomuto(vector <int> & numbers, int lo, int hi) {
     int pivot = numbers[hi];
     int i = lo - 1;
@@ -47,18 +48,29 @@ void quickSort(vector <int> & numbers, int lo, int hi) {
         quickSort(numbers, pivot + 1, hi);
     }
 }
+*/
 
 
 int main() {
     int n;
     cin >> n;
 
+    map <int, int> counts;
     vector <int> numbers(n);
     for (int i = 0; i < n; i++) {
-        cin >> numbers[i];
+        int number;
+        cin >> number;
+        numbers[i] = number;
+        counts[number]++;
+        cout << "Count for value " << number << " is now "<< counts[number] << endl;
     }
 
-    quickSort(numbers, 0, numbers.size() - 1);
+    for (int i = 0; i < n; i++) {
+        cout << counts[i] << " ";
+    }
+    cout << "\n";
+
+//    quickSort(numbers, 0, numbers.size() - 1);
 
     return 0;
 }
