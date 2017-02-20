@@ -16,12 +16,26 @@
 #include <algorithm>
 using namespace std;
 
+class data_pair {
+public:
+    int value;
+    string text;
+    data_pair (const int value, const string text) : value(value), text(text) {}
+};
+
+
+struct paircomp {
+    bool operator() (const data_pair & lhs, const data_pair & rhs) const
+    {return lhs.value < rhs.value;}
+};
+
+
+
 int main() {
     int n;
     cin >> n;
 
-    vector <pair<int,string>> input_data;
-    set<int> numbers_set;
+    multiset<data_pair, paircomp> values_multi;
 
     for (int i = 0; i < n; i++) {
         int number;
@@ -31,22 +45,13 @@ int main() {
         if (i < (n >> 1)) {
             str = '-';
         }
-        input_data.push_back(make_pair(number , str));
-        numbers_set.insert(number);
+        data_pair pair(number, str);
+        values_multi.insert(pair);
     }
 
-    vector<int> numbers_unique;
-    for (int value : numbers_set) {
-        numbers_unique.push_back(value);
+    for (auto & data: values_multi) {
+        cout << data.text << " ";
     }
-
-    for (int i = 0; i < numbers_unique.size(); i++) {
-        for (int j = 0; j < n; j++) {
-            if (input_data[j].first == numbers_unique[i])
-                cout << input_data[j].second << " " ;
-        }
-    }
-
     return 0;
-}
 
+}
