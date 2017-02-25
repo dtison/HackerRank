@@ -1,8 +1,3 @@
-#include <map>
-#include <set>
-#include <list>
-#include <cmath>
-#include <ctime>
 #include <deque>
 #include <queue>
 #include <stack>
@@ -16,77 +11,49 @@
 #include <algorithm>
 using namespace std;
 
-struct element {
-    int diff;
-    pair <int, int> numbers;
-    element (const int a, const int b) {
-        int smaller = a, bigger = b;
-        if (smaller > bigger) {
-            smaller = b;
-            bigger = a;
-        }
-        numbers = make_pair (smaller,bigger);
-        diff = abs (a - b);
-    }
-};
 
-struct elementcomp {
-    bool operator() (const element & lhs, const element & rhs) const  {
-        if (lhs.diff == rhs.diff) {
-            return lhs.numbers.first < rhs.numbers.first;
-        } else {
-            return lhs.diff < rhs.diff;
-        }
-    }
-};
-
-
-
-int main() {
-    int n;
-    cin >> n;
-
-
+vector<int>  GetAllTheNumbers(const int n) {
     vector<int> numbers;
     for (int i = 0; i < n; i++) {
         int number;
         cin >> number;
         numbers.push_back(number);
     }
+    return numbers;
+}
 
-/*    for (auto & number: numbers) {
-        cout << number << endl;
-    }*/
+int GetMinDiff(const vector<int> numbers) {
 
-    multiset<element, elementcomp> values_multi;
+    int min_diff = numbers[1] - numbers[0];
+    for (int i = 1; i < numbers.size() - 1; i++) {
+        int test_diff = numbers[i + 1] - numbers[i];
+        if (min_diff > test_diff) {
+            min_diff = test_diff;
+        }
+    }
+    return min_diff;
+}
 
-    for (int i = 0; i < (numbers.size() - 1); i++) {
-        for (int j = i + 1; j < numbers.size(); j++) {
-            element e(numbers[i], numbers[j]);
-            values_multi.insert(e);
+void DisplayLowestPairs (const vector<int> numbers, const int min_diff) {
+    for (int i = 0; i < numbers.size() - 1; i++) {
+        if (numbers[i + 1] - numbers[i] == min_diff) {
+            cout << numbers[i] << " " << numbers[i + 1] << " ";
         }
     }
 
-/*
-    for (auto & value: values_multi) {
-        cout << "{" << value.numbers.first << ", " << value.numbers.second << " = " << value.diff << "}"  << endl;
-    }
-*/
+}
 
+int main() {
+    int n;
+    cin >> n;
 
-    multiset<element, elementcomp>::iterator multi_iterator = values_multi.begin();
-    int min_diff = (*multi_iterator).diff;
-    int current_diff = min_diff;
+    vector<int> numbers = GetAllTheNumbers(n);
 
-//    cout << "min diff is " << min_diff << endl;
+    sort(numbers.begin(), numbers.end());
 
-    while (current_diff == min_diff) {
-        element e = *multi_iterator;
-        cout << e.numbers.first << " " << e.numbers.second << " ";
-        multi_iterator++;
-        current_diff = (*multi_iterator).diff;
-    }
+    int min_diff = GetMinDiff(numbers);
+
+    DisplayLowestPairs(numbers, min_diff);
 
     return 0;
-
 }
