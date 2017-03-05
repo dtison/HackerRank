@@ -1,9 +1,9 @@
-Security Bijective Functions
-============================
+Security Function Inverses
+==========================
 
-C++ code [passes all tests](https://www.hackerrank.com/challenges/security-bijective-functions) on 2017/03/04
+C++ code [passes all tests](https://www.hackerrank.com/challenges/security-inverse-of-a-function) on 2017/03/04
 
-Original [Security Bijective Functions](https://www.hackerrank.com/challenges/security-bijective-functions) challenge.
+Original [Security Function Inverses](https://www.hackerrank.com/challenges/security-inverse-of-a-function) challenge.
 
 
 **Note about source comments:**
