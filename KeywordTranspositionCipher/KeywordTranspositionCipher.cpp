@@ -14,29 +14,6 @@
 using namespace std;
 
 
-/*vector<int>  GetAllTheNumbers(const int & n) {
-    vector<int>  numbers;
-    // Indexing at 1 not 0, add filler space
-    numbers.push_back(0);
-    for (int i = 1; i <= n; i++) {
-        int number;
-        cin >> number;
-        numbers.push_back(number);
-    }
-    return numbers;
-}
-
-bool IsInvolution(vector<int> numbers) {
-    bool is_involution = true;
-    for (int i = 0; i < numbers.size(); i++) {
-        if (numbers[numbers[i]] != i) {
-            is_involution = false;
-            break;
-        }
-    }
-    return is_involution;
-}*/
-
 /*
  *
 
@@ -54,8 +31,6 @@ Z
 void SortKeywordAndRemoveDups(const string & keyword,
                               map<char, int> & keyword_sorted,
                               string & keyword_nodups) {
-   // string keyword_nodups;
-
     for (auto & c: keyword) {
         if (keyword_sorted[c] < 1) {
             keyword_nodups.append(1, c);
@@ -71,21 +46,70 @@ string GetSubstitutionAlphabet (const string & keyword, const string & cipher_te
     string  keyword_nodups;
     SortKeywordAndRemoveDups(keyword, keyword_sorted, keyword_nodups);
 
+    const int num_rows = (26 + keyword_nodups.size() - 1) / keyword_nodups.size();
+    cout << " num_rows is " << num_rows << endl;
+    vector<vector<char>> temp_alphabet(num_rows, vector<char> (keyword_nodups.size()));
+
+    // Build up the substitution alphabet - first row
+    for (int i = 0; i < keyword_nodups.size(); i++) {
+        temp_alphabet[0][i] = keyword_nodups[i];
+    }
+
+
+    cout << "---- keyword_sorted 2 size: " << keyword_sorted.size() << endl;
     for (auto & c: keyword_sorted) {
         cout << c.first << endl;
     }
 
-    // Build up the substitution alphabet
-    for (auto & c: keyword_nodups) {
-        substitution_alphabet.append(1, c);
-    }
+    map<char, int> keyword_sorted2 = keyword_sorted;
 
 
+
+    // Remaining rows
+    int row = 1;
+    int col = 0;
     for (char c = 'A'; c <= 'Z'; c++) {
+        if (keyword_sorted != keyword_sorted2) {
+            cout << "SOMETHING WENT WRONG " << endl;
+        }
         if (keyword_sorted[c] == 0) {
-            substitution_alphabet.append(1, c);
+        //    cout << " SETTING " << c << " row " << row << " col " << col << endl;
+            temp_alphabet[row][col] = c;
+            col++;
+            if (col == keyword_nodups.size()) {
+                row++;
+                col = 0;
+            }
         }
     }
+    cout << "---- keyword_sorted 3 size: " << keyword_sorted.size() << endl;
+    for (auto & c: keyword_sorted) {
+        cout << c.first << endl;
+    }
+
+  /*  cout << " TEMP ALPHABET: " << endl;
+    for (int i = 0; i < num_rows; i++) {
+        for (int j = 0; j < keyword_nodups.size(); j++) {
+            cout << temp_alphabet[i][j];
+        }
+    }*/
+
+
+    cout << "---- keyword_sorted 4 size: " << keyword_sorted.size() << endl;
+    for (auto & c: keyword_sorted) {
+        cout << c.first << endl;
+    }
+
+
+    for (auto & c: keyword_sorted) {
+        size_t pos = keyword_nodups.find(c.first);
+        for (int i = 0; i < num_rows; i++) {
+    //        cout << " for " << c.first << " pos" << pos << " setting " << temp_alphabet[i][pos] << " in sa " << endl;
+            substitution_alphabet.append(1, temp_alphabet[i][pos]);
+        }
+
+    }
+
     return substitution_alphabet;
 }
 
@@ -100,31 +124,31 @@ int main() {
         cin.ignore();
         getline(cin, cipher_text);
 
-    //    cout << keyword << " " << cipher_text << " " << n <<  endl;
-        string substitution_alphabet = GetSubstitutionAlphabet (keyword, cipher_text);
+        //    cout << keyword << " " << cipher_text << " " << n <<  endl;
+        string substitution_alphabet = GetSubstitutionAlphabet(keyword, cipher_text);
 
-        for (auto & c: substitution_alphabet) {
-            cout << c;
-        }
+        cout << " FINAL SUBSTITUTION ALPHABET " << substitution_alphabet << endl;
+
         cout << endl;
 
 
-        //    for (int i = keyword_nodups.size(); i < 26; i++) {
-        int row = 1;
-        int col = 0;
+ /*       string s = "CDJOWEBINVRFKPXSAHMUZTGLQY";
+        if (substitution_alphabet != s) {
+            cout << "NOT EQUAL" << " s len " << s.size() << " sa len " << substitution_alphabet.size();
 
-/*        const int row = i / keyword_nodups.size();
-        const int col = i - (row * keyword_nodups.size());*/
+        }
+*/
 
+        for (auto &c: cipher_text) {
+            if (c != ' ') {
+                size_t pos = substitution_alphabet.find(c);
+           //     cout << "c  " << c << " found at pos " << pos << " in string " << substitution_alphabet << endl;
+            }
+        }
     }
 
-/*
-    vector<int> numbers = GetAllTheNumbers(n);
-
-    cout << (IsInvolution(numbers) ? "YES" : "NO");*/
 
     return 0;
+
 }
 
-
-//cout << numbers[numbers[i]] << " " << i << endl;
