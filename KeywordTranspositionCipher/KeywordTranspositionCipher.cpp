@@ -39,6 +39,36 @@ void SortKeywordAndRemoveDups(const string & keyword,
     }
 }
 
+
+void DisplayDebugging (const string & keyword,
+                        const map<char, int> & keyword_sorted,
+                        const string & keyword_nodups,
+                        const int num_rows,
+                       const vector<vector<char>> temp_alphabet,
+                       const string title = "UNTITLED" ) {
+
+    cout << endl << "-------------  Debugging Info: " << title << "  --------------- " << endl;
+    cout << "keyword: " << keyword << " nodups: " << keyword_nodups << endl;
+    cout << "sorted: ";
+    for (auto & c: keyword_sorted) {
+        cout << c.first;
+    }
+    cout << endl;
+    cout << "num_rows: " << num_rows << endl;
+    cout << "temp_alphabet: " << endl;
+
+    for (int i = 0; i < num_rows; i++) {
+        for (int j = 0; j < keyword_nodups.size(); j++) {
+            cout << temp_alphabet[i][j];
+        }
+        cout << endl;
+    }
+    cout << "-------------  END Debugging Info: " << title << "  --------------- " << endl << endl;
+
+
+}
+
+
 string GetSubstitutionAlphabet (const string & keyword, const string & cipher_text) {
     string substitution_alphabet;
 
@@ -46,22 +76,23 @@ string GetSubstitutionAlphabet (const string & keyword, const string & cipher_te
     string  keyword_nodups;
     SortKeywordAndRemoveDups(keyword, keyword_sorted, keyword_nodups);
 
+
     const int num_rows = (26 + keyword_nodups.size() - 1) / keyword_nodups.size();
-    cout << " num_rows is " << num_rows << endl;
-    vector<vector<char>> temp_alphabet(num_rows, vector<char> (keyword_nodups.size()));
+
+    vector<vector<char>> temp_alphabet(num_rows, vector<char> (keyword_nodups.size(), 32));
 
     // Build up the substitution alphabet - first row
     for (int i = 0; i < keyword_nodups.size(); i++) {
         temp_alphabet[0][i] = keyword_nodups[i];
     }
 
+//DisplayDebugging(keyword, keyword_sorted, keyword_nodups, num_rows, temp_alphabet, "Just after First Row");
 
-    cout << "---- keyword_sorted 2 size: " << keyword_sorted.size() << endl;
-    for (auto & c: keyword_sorted) {
-        cout << c.first << endl;
-    }
-
-    map<char, int> keyword_sorted2 = keyword_sorted;
+    /*
+     * ostringstream os;
+os << "dec: " << 15 << " hex: " << std::hex << 15 << endl;
+cout<<os.str()<<endl;
+     */
 
 
 
@@ -69,43 +100,32 @@ string GetSubstitutionAlphabet (const string & keyword, const string & cipher_te
     int row = 1;
     int col = 0;
     for (char c = 'A'; c <= 'Z'; c++) {
-        if (keyword_sorted != keyword_sorted2) {
-            cout << "SOMETHING WENT WRONG " << endl;
-        }
-        if (keyword_sorted[c] == 0) {
-        //    cout << " SETTING " << c << " row " << row << " col " << col << endl;
+
+        if (keyword_sorted.find(c) == keyword_sorted.end()) {
+
+            ostringstream os;
+
             temp_alphabet[row][col] = c;
+
             col++;
+
             if (col == keyword_nodups.size()) {
                 row++;
                 col = 0;
             }
         }
     }
-    cout << "---- keyword_sorted 3 size: " << keyword_sorted.size() << endl;
-    for (auto & c: keyword_sorted) {
-        cout << c.first << endl;
-    }
 
-  /*  cout << " TEMP ALPHABET: " << endl;
-    for (int i = 0; i < num_rows; i++) {
-        for (int j = 0; j < keyword_nodups.size(); j++) {
-            cout << temp_alphabet[i][j];
-        }
-    }*/
-
-
-    cout << "---- keyword_sorted 4 size: " << keyword_sorted.size() << endl;
-    for (auto & c: keyword_sorted) {
-        cout << c.first << endl;
-    }
+ //   DisplayDebugging(keyword, keyword_sorted, keyword_nodups, num_rows, temp_alphabet, "After temp_alphabet created");
 
 
     for (auto & c: keyword_sorted) {
         size_t pos = keyword_nodups.find(c.first);
         for (int i = 0; i < num_rows; i++) {
     //        cout << " for " << c.first << " pos" << pos << " setting " << temp_alphabet[i][pos] << " in sa " << endl;
-            substitution_alphabet.append(1, temp_alphabet[i][pos]);
+            if (temp_alphabet[i][pos] != ' ') {
+                substitution_alphabet.append(1, temp_alphabet[i][pos]);
+            }
         }
 
     }
@@ -119,30 +139,27 @@ int main() {
     cin >> n;
 
     while (n--) {
+
         string keyword, cipher_text;
         cin >> keyword;
         cin.ignore();
         getline(cin, cipher_text);
 
-        //    cout << keyword << " " << cipher_text << " " << n <<  endl;
+
         string substitution_alphabet = GetSubstitutionAlphabet(keyword, cipher_text);
 
-        cout << " FINAL SUBSTITUTION ALPHABET " << substitution_alphabet << endl;
-
+/*
+        cout << " FINAL SUBSTITUTION ALPHABET  " << substitution_alphabet << " size " << substitution_alphabet.size() << endl;
         cout << endl;
-
-
- /*       string s = "CDJOWEBINVRFKPXSAHMUZTGLQY";
-        if (substitution_alphabet != s) {
-            cout << "NOT EQUAL" << " s len " << s.size() << " sa len " << substitution_alphabet.size();
-
-        }
 */
 
         for (auto &c: cipher_text) {
             if (c != ' ') {
                 size_t pos = substitution_alphabet.find(c);
+                cout << (char) ('A' + pos);
            //     cout << "c  " << c << " found at pos " << pos << " in string " << substitution_alphabet << endl;
+            } else {
+                cout << c;
             }
         }
     }
