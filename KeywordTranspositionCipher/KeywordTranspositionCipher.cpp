@@ -40,7 +40,7 @@ bool IsInvolution(vector<int> numbers) {
 /*
  *
 
- SECRT
+SECRT
 ABDFG
 HIJKL
 MNOPQ
@@ -51,34 +51,42 @@ Z
  *
  */
 
-string RemoveDups(const string & keyword) {
-    set<char> chars;
-    for (auto & c: keyword) {
-        chars.insert(c);
-    }
+void SortKeywordAndRemoveDups(const string & keyword,
+                              map<char, int> & keyword_sorted,
+                              string & keyword_nodups) {
+   // string keyword_nodups;
 
     for (auto & c: keyword) {
-        if (chars.count(c)) {
-            cout << c << "is in " << keyword << endl;
+        if (keyword_sorted[c] < 1) {
+            keyword_nodups.append(1, c);
+            keyword_sorted[c]++;
         }
     }
-
-
-
-    for (auto & c: chars) {
-        cout << c << endl;
-    }
-cout << "done " << endl;
-    string s;
-    return s;
 }
 
-vector<char> GetSubstitutionAlphabet (const string & keyword, const string & cipher_text) {
-    vector<char> result;
-    string keyword_nodups = RemoveDups(keyword);
+string GetSubstitutionAlphabet (const string & keyword, const string & cipher_text) {
+    string substitution_alphabet;
+
+    map<char, int> keyword_sorted;
+    string  keyword_nodups;
+    SortKeywordAndRemoveDups(keyword, keyword_sorted, keyword_nodups);
+
+    for (auto & c: keyword_sorted) {
+        cout << c.first << endl;
+    }
+
+    // Build up the substitution alphabet
+    for (auto & c: keyword_nodups) {
+        substitution_alphabet.append(1, c);
+    }
 
 
-    return result;
+    for (char c = 'A'; c <= 'Z'; c++) {
+        if (keyword_sorted[c] == 0) {
+            substitution_alphabet.append(1, c);
+        }
+    }
+    return substitution_alphabet;
 }
 
 
@@ -93,8 +101,20 @@ int main() {
         getline(cin, cipher_text);
 
     //    cout << keyword << " " << cipher_text << " " << n <<  endl;
-        GetSubstitutionAlphabet (keyword, cipher_text);
-        cout << "After GetSub " << endl;
+        string substitution_alphabet = GetSubstitutionAlphabet (keyword, cipher_text);
+
+        for (auto & c: substitution_alphabet) {
+            cout << c;
+        }
+        cout << endl;
+
+
+        //    for (int i = keyword_nodups.size(); i < 26; i++) {
+        int row = 1;
+        int col = 0;
+
+/*        const int row = i / keyword_nodups.size();
+        const int col = i - (row * keyword_nodups.size());*/
 
     }
 
